@@ -32,7 +32,8 @@ namespace Projeto20
                 Console.WriteLine("1 - Visualizar colaboradores");
                 Console.WriteLine("2 - Inserir colaboradores");
                 Console.WriteLine("3 - Remover colaborador");
-                Console.WriteLine("4 - Atualizar salário");
+                Console.WriteLine("4 - Aumentar salário em porcentagem");
+                Console.WriteLine("5 - Atualizar salário");
                 Console.WriteLine("s - Sair");
                 op = Console.ReadLine();
                 if (op == "1"){

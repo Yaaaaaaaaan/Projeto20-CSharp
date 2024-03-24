@@ -20,6 +20,27 @@ namespace Projeto20_CSharp
             Salario += Salario * porcentagem / 100.0;
         }
 
+        public void AtualizaSalario(double valor, string op)
+        {
+            if(op== "+")
+            {
+                Salario = Salario + valor;
+            }
+            else if (op == "-")
+            {
+                Salario = Salario - valor;
+            }
+            else if (op == "*")
+            {
+                Salario = Salario * valor;
+            }
+            if (op == "/")
+            {
+                Salario = Salario / valor;
+            }
+
+        }
+
         public override string ToString()
         {
             return Id
