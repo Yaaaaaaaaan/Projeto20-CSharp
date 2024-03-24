@@ -33,8 +33,9 @@ namespace Projeto20
                 Console.WriteLine("1 - Visualizar colaboradores");
                 Console.WriteLine("2 - Inserir colaboradores");
                 Console.WriteLine("3 - Remover colaborador");
-                Console.WriteLine("4 - Aumentar salário em porcentagem");
-                Console.WriteLine("5 - Atualizar salário");
+                Console.WriteLine("4 - Atualizar colaborador");
+                Console.WriteLine("5 - Aumentar salário em porcentagem");
+                Console.WriteLine("6 - Atualizar salário");
                 Console.WriteLine("0 - Sair");
                 op = Console.ReadLine();
                 if (op == "1"){
@@ -43,11 +44,15 @@ namespace Projeto20
                     goto inserirLista;
                 }else if (op == "3"){
                     goto removerLista;
-                }else if (op == "4"){
-                    goto atualizarListaPorcentagem;
                 }else if (op == "5"){
+                    goto atualizarListaPorcentagem;
+                }else if (op == "6"){
                     goto atualizarLista;
-                }else if (op == "s" || op == "S" || op== "0"){
+                }
+                else if (op == "4"){
+                    goto atualizarListaColaborador;
+                }
+                else if (op == "s" || op == "S" || op== "0"){
                     goto fim;
                 }
             inserirLista:
@@ -140,15 +145,47 @@ namespace Projeto20
                 Console.WriteLine("Insira o Id do colaborador a ser excluído: ");
                 pesquisaId = int.Parse(Console.ReadLine());
                 Colaborador rem = lista.Find(a => a.Id == pesquisaId);
-                if (rem != null)
+            if (rem != null)
+            {
+                Console.WriteLine("Colaborador :" + rem.ToString() + "Confirma? (S/N)");
+                op = Console.ReadLine();
+                if (op == "S" || op == "s")
                 {
                     lista.Remove(rem);
-                }
-                else
-                {
-                    Console.WriteLine("Id Inexistente.");
-                }
+                }else { goto removerLista; }
+            }
+            else
+            {
+                Console.WriteLine("Id Inexistente.");
+            }
                 goto verLista;
+            atualizarListaColaborador:
+                Console.WriteLine();
+                Console.WriteLine("----------------------------------------------------------------------------------------");
+                Console.WriteLine();
+                Console.WriteLine("Insira o Id do colaborador a ser atualizado: ");
+                pesquisaId = int.Parse(Console.ReadLine());
+                Colaborador atu = lista.Find(a => a.Id == pesquisaId);
+            if (atu != null)
+            {
+                Console.WriteLine("Colaborador :" + atu.ToString() + "Confirma? (S/N)");
+                op = Console.ReadLine();
+                if (op == "S" || op == "s")
+                {
+                    Console.WriteLine("Novo nome; ");
+                    string nome = Console.ReadLine();
+                    int id = atu.Id;
+                    double salario = atu.Salario;
+                    lista.Add(new Colaborador(id, nome, salario));
+                    lista.Remove(atu);
+                }else { goto atualizarListaColaborador; }
+            }
+            
+            else
+            {
+                Console.WriteLine("Id Inexistente.");
+            }
+            goto verLista;
             verLista:
                 Console.WriteLine();
                 Console.WriteLine("----------------------------------------------------------------------------------------");
