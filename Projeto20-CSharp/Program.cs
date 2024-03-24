@@ -12,6 +12,7 @@ namespace Projeto20
     internal class Program
     {
         static List<Colaborador> lista = new List<Colaborador>();
+        static int pesquisaId;
         static void Main(string[] args)
         {
                 Console.WriteLine("Selecione a operação; ");
@@ -34,7 +35,7 @@ namespace Projeto20
                 Console.WriteLine("3 - Remover colaborador");
                 Console.WriteLine("4 - Aumentar salário em porcentagem");
                 Console.WriteLine("5 - Atualizar salário");
-                Console.WriteLine("s - Sair");
+                Console.WriteLine("0 - Sair");
                 op = Console.ReadLine();
                 if (op == "1"){
                     goto verLista;
@@ -43,8 +44,10 @@ namespace Projeto20
                 }else if (op == "3"){
                     goto removerLista;
                 }else if (op == "4"){
+                    goto atualizarListaPorcentagem;
+                }else if (op == "5"){
                     goto atualizarLista;
-                }else if (op == "s" || op == "S"){
+                }else if (op == "s" || op == "S" || op== "0"){
                     goto fim;
                 }
             inserirLista:
@@ -56,7 +59,7 @@ namespace Projeto20
                 for (int m = 1; m<= p; m++ ){
                
                     Console.WriteLine();
-                    Console.WriteLine("Colaborador #; " +1+":");
+                    Console.WriteLine("Colaborador #; " +m+":");
                     Console.WriteLine("Id: ");
                     int id = int.Parse(Console.ReadLine());
                     Console.WriteLine("Nome; ");
@@ -75,20 +78,55 @@ namespace Projeto20
                 {
                     goto verLista;
                 }
-           
-            atualizarLista:
+           atualizarLista:
                 Console.WriteLine();
                 Console.WriteLine("----------------------------------------------------------------------------------------");
                 Console.WriteLine();
                 Console.WriteLine("Insira o Id do colaborador a se alterar o salário: ");
-                int pesquisaId = int.Parse(Console.ReadLine());
+                pesquisaId = int.Parse(Console.ReadLine());
 
-                Colaborador col = lista.Find(a => a.Id == pesquisaId);
-                if(col != null)
+                Colaborador aL = lista.Find(a => a.Id == pesquisaId);
+                if (aL != null)
                 {
-                    Console.WriteLine("Insira a porcentagem de aumento: ");
-                    double porcentagem = double.Parse(Console.ReadLine() , CultureInfo.InvariantCulture);
-                    col.AumentoDeSalario(porcentagem);
+                    Console.WriteLine("Colaborador :" + aL.ToString() + "Confirma? (S/N)");
+                    op = Console.ReadLine();
+                        if (op == "S" || op == "s")
+                        {
+                            Console.WriteLine("Insira a operação desejada: (- para subtração, + para soma, / para divisão e * para multiplicação)");
+                            op = Console.ReadLine();
+                            double valor = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                            aL.AtualizaSalario(valor, op);
+                        }else{
+                            goto atualizarLista; 
+                        }
+                }
+                else
+                {
+                    Console.WriteLine("Id Inexistente.");
+                }
+                goto verLista;
+            atualizarListaPorcentagem:
+                Console.WriteLine();
+                Console.WriteLine("----------------------------------------------------------------------------------------");
+                Console.WriteLine();
+                Console.WriteLine("Insira o Id do colaborador a se alterar o salário: ");
+                pesquisaId = int.Parse(Console.ReadLine());
+                Colaborador aLP = lista.Find(a => a.Id == pesquisaId);
+                if(aLP != null)
+                {
+                    Console.WriteLine("Colaborador :" + aLP.ToString() + "Confirma? (S/N)");
+                    op = Console.ReadLine();
+                    if(op == "S"||op == "s")
+                    {
+                        Console.WriteLine("Insira a porcentagem de aumento: ");
+                        double porcentagem = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                        aLP.AumentoDeSalario(porcentagem);
+                    }
+                    else
+                    {
+                        goto atualizarListaPorcentagem;
+                    }
+                    
                 }
                 else
                 {
