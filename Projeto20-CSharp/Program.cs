@@ -14,31 +14,40 @@ namespace Projeto20
         static List<Colaborador> lista = new List<Colaborador>();
         static void Main(string[] args)
         {
-            inicio:
                 Console.WriteLine("Selecione a operação; ");
-                Console.WriteLine("1 - Visualizar lista");
-                Console.WriteLine("2 - Inserir colaboradores na lista");
-                Console.WriteLine("3 - Remover colaborador da lista");
-                Console.WriteLine("4 - Atualizar salário do colaborador");
+                Console.WriteLine("1 - Inserir colaboradores");
                 Console.WriteLine("s - Sair");
 
                 string op = Console.ReadLine();
-
                 if(op == "1"){
-                    goto verLista;
-                }
-                else if(op == "2"){
                     goto inserirLista;
-                }
-                else if (op == "3"){
-                    goto removerLista;
-                }
-                else if (op == "4"){
-                    goto atualizarLista;
                 }else if (op == "s" || op== "S"){
                     goto fim;
                 }
+
+            inicio:
+                Console.WriteLine("----------------------------------------------------------------------------------------");
+                Console.WriteLine();
+                Console.WriteLine("Selecione a operação; ");
+                Console.WriteLine("1 - Visualizar colaboradores");
+                Console.WriteLine("2 - Inserir colaboradores");
+                Console.WriteLine("3 - Remover colaborador");
+                Console.WriteLine("4 - Atualizar salário");
+                Console.WriteLine("s - Sair");
+                op = Console.ReadLine();
+                if (op == "1"){
+                    goto verLista;
+                }else if (op == "2"){
+                    goto inserirLista;
+                }else if (op == "3"){
+                    goto removerLista;
+                }else if (op == "4"){
+                    goto atualizarLista;
+                }else if (op == "s" || op == "S"){
+                    goto fim;
+                }
             inserirLista:
+                Console.WriteLine();
                 Console.WriteLine("Colaboradores a serem empregados; ");
                 int p = int.Parse(Console.ReadLine());
                
@@ -63,10 +72,12 @@ namespace Projeto20
                     goto atualizarLista;
                 }else if(op == "n"|| op == "N")
                 {
-                    goto inicio;
+                    goto verLista;
                 }
            
             atualizarLista:
+                Console.WriteLine();
+                Console.WriteLine("----------------------------------------------------------------------------------------");
                 Console.WriteLine();
                 Console.WriteLine("Insira o Id do colaborador a se alterar o salário: ");
                 int pesquisaId = int.Parse(Console.ReadLine());
@@ -85,7 +96,9 @@ namespace Projeto20
                 goto verLista;
             removerLista:
                 Console.WriteLine();
-                Console.WriteLine("Insira o Id do colaborador a se alterar o salário: ");
+                Console.WriteLine("----------------------------------------------------------------------------------------");
+                Console.WriteLine();
+                Console.WriteLine("Insira o Id do colaborador a ser excluído: ");
                 pesquisaId = int.Parse(Console.ReadLine());
                 Colaborador rem = lista.Find(a => a.Id == pesquisaId);
                 if (rem != null)
@@ -96,8 +109,10 @@ namespace Projeto20
                 {
                     Console.WriteLine("Id Inexistente.");
                 }
-                goto fim;
+                goto verLista;
             verLista:
+                Console.WriteLine();
+                Console.WriteLine("----------------------------------------------------------------------------------------");
                 Console.WriteLine();
                 Console.WriteLine("Lista atualizada de colaboradores: ");
                 foreach( Colaborador obj in lista)
@@ -106,6 +121,8 @@ namespace Projeto20
                 }
                 goto fim;
             fim:
+                Console.WriteLine("----------------------------------------------------------------------------------------");
+                Console.WriteLine();
                 Console.WriteLine("Deseja retornar ao menu? s/n ");
                 op = Console.ReadLine();
                 if (op == "s" || op=="S")
