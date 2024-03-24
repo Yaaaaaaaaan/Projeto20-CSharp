@@ -23,7 +23,7 @@ namespace Projeto20
                 if(op == "1"){
                     goto inserirLista;
                 }else if (op == "s" || op== "S"){
-                    goto fim;
+                    goto sair;
                 }
 
             inicio:
@@ -206,7 +206,8 @@ namespace Projeto20
                     goto inicio;
                 }
             else {  }
-                
+            sair:;
+
         }
     }
 }
